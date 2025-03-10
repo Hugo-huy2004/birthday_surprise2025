@@ -1,0 +1,72 @@
+
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đếm Ngược Sinh Nhật</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #67b8ff, #2afffb);
+            color: #ebff68;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        #countdown {
+            font-size: 100px;
+            font-weight: bold;
+            margin-bottom: 50px;
+        }
+        .btn {
+            background: #00c3ff;
+            color: rgb(7, 6, 6);
+            padding: 30px 60px;
+            font-size: 30px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn:disabled {
+            background: rgb(251, 251, 251);
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>HAPPY BIRTHDAY OF JASON PHAN</h1>
+    <div id="countdown"></div>
+    <button class="btn" id="openGift" disabled>Vui lòng đợi...</button>
+
+    <script>
+        const targetDate = new Date("2025-03-23 00:00:00").getTime();
+        const countdown = document.getElementById("countdown");
+        const openGift = document.getElementById("openGift");
+
+        setInterval(() => {
+            let now = new Date().getTime();
+            let distance = targetDate - now;
+            if (distance <= 0) {
+                countdown.innerHTML = "🎉 ĐÃ ĐẾN LÚC NHẬN QUÀ";
+                openGift.innerText = "Mở Quà";
+                openGift.disabled = false;
+                openGift.onclick = () => window.location.href = "gift.html";
+            } else {
+                let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                countdown.innerHTML = `⏳ ${days} ngày ${hours}h ${minutes}m ${seconds}s`;
+            }
+        }, 1000);
+    </script>
+
+</body>
+</html>
